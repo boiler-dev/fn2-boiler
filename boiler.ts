@@ -1,40 +1,31 @@
-import {
-  InstallBoiler,
-  PromptBoiler,
-  GenerateBoiler,
-  UninstallBoiler,
-} from "boiler-dev"
-
-export const install: InstallBoiler = async ({
-  cwdPath,
-  files,
-}) => {
-  const actions = []
-  return actions
-}
-
-export const prompt: PromptBoiler = async ({
-  cwdPath,
-  files,
-}) => {
-  const prompts = []
-  return prompts
-}
+import { GenerateBoiler } from "boiler-dev"
+import { join } from "path"
 
 export const generate: GenerateBoiler = async ({
   cwdPath,
-  answers,
   files,
 }) => {
   const actions = []
-  return actions
-}
 
-export const uninstall: UninstallBoiler = async ({
-  cwdPath,
-  answers,
-  files,
-}) => {
-  const actions = []
+  for (const file of files) {
+    const { name, source } = file
+
+    if (name === "fn2.ts") {
+      actions.push({
+        action: "write",
+        path: join(cwdPath, "src", name),
+        source,
+      })
+    }
+
+    if (name === "fn2.spec.ts") {
+      actions.push({
+        action: "write",
+        path: join(cwdPath, "test", name),
+        source,
+      })
+    }
+  }
+
   return actions
 }
