@@ -107,7 +107,7 @@ export class Fn2 {
       steps = [memoOrStep, argsOrStep].concat(steps)
     }
 
-    steps = steps.filter(step => step)
+    steps = steps.filter((step) => step)
 
     return [memo, args, steps]
   }
